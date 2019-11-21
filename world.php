@@ -11,11 +11,26 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' ){
     $stmt = $conn->query("SELECT * FROM countries WHERE name LIKE '%$country%'");
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    echo "<ul>";
+    echo "<table>";
+    echo "<tr>";
+    echo "<th>Country Name</th>";
+    echo "<th>Continent</th>";
+    echo "<th>Independence Year</th>";
+    echo "<th>Head of State</th>";
+    echo "</tr>";
     foreach($results as $row) {
-      echo "<li>" .  $row['name'] . ' is ruled by ' . $row['head_of_state'] . "</li>";
+      $countryName = $row['name'];
+      $continent = $row['continent'];
+      $independenceYear = $row['independence_year'];
+      $headOfState = $row['head_of_state'];
+      echo "<tr>";
+      echo "<td>$countryName</td>";
+      echo "<td>$continent</td>";
+      echo "<td>$independenceYear</td>";
+      echo "<td>$headOfState</td>";
+      echo "</tr>";
     }
-    echo "</ul>";
+    echo "</table>";
 
   }
 }
