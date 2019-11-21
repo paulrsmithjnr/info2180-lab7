@@ -1,13 +1,28 @@
 window.onload = function() {
+
+    var httpRequest;
     var lookupButton = document.getElementById("lookup");
+    var cityLookUpButton = document.getElementById("city");
 
     lookupButton.onclick = lookupCountry;
+    cityLookUpButton.onclick = lookupCity;
 
     function lookupCountry() {
         event.preventDefault();
         httpRequest = new XMLHttpRequest();
         var userInput = document.getElementById("country").value;
         var url = "world.php" + "?country=" + userInput;
+
+        httpRequest.onreadystatechange = getResults;
+        httpRequest.open('GET', url);
+        httpRequest.send();
+    }
+
+    function lookupCity() {
+        event.preventDefault();
+        httpRequest = new XMLHttpRequest();
+        var userInput = document.getElementById("country").value;
+        var url = "world.php" + "?country=" + userInput + "&context=cities";
 
         httpRequest.onreadystatechange = getResults;
         httpRequest.open('GET', url);
